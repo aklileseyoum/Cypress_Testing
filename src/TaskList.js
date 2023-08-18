@@ -13,9 +13,9 @@ export default function TaskList () {
     
 
     return (
-        <ul className='tasklists'>
+        <ul className='tasklists' data-test="lists">
           {todos &&
-            todos.map((t) => (
+            todos.map((t,i) => (
               <li key={t.id} className='lists'>
                 <span className='todo'>{t.todo}</span>
                 <button 
@@ -27,6 +27,7 @@ export default function TaskList () {
                     color: "rgb(65, 27, 27)",
                     backgroundColor: "antiquewhite",
                 }}
+                data-test={`button${i}`}
                 >Delete</button>
               </li>
             )) 

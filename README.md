@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Web Application Test Suite Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This documentation outlines the test cases for the functionality of a web application. The tests are designed to validate the core features of adding and deleting tasks, as well as the state management of tasks within the application.
 
-## Available Scripts
+## Table of Contents
+- [Adding a Task](#adding-a-task)
+- [Deleting a Task](#deleting-a-task)
+- [Test State Management](#test-state-management)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Adding a Task
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Test Case 1: Does not accept an empty task
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Description:** This test ensures that attempting to add an empty task is not allowed.
 
-### `npm test`
+**Steps:**
+1. Visit the web application at 'http://localhost:3000'.
+2. Click on the designated button.
+3. Check the count of task lists with class 'lists'.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Expected Outcome:** The count of task lists should remain 0, indicating that an empty task was not added.
 
-### `npm run build`
+### Test Case 2: Successfully adds a task
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Description:** This test verifies that a task can be successfully added to the task list.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Steps:**
+1. Visit the web application at 'http://localhost:3000'.
+2. Type the text 'New Task' into the input field with data-test attribute 'inputs'.
+3. Click the button with data-test attribute 'btn'.
+4. Check if the task list contains an item with the text 'New Task'.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Expected Outcome:** The task list should contain an item with the text 'New Task', confirming successful addition of the task.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deleting a Task
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Test Case: Successfully deletes a task
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Description:** This test ensures that a task can be deleted from the task list.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Steps:**
+1. Visit the web application at 'http://localhost:3000'.
+2. Type 'First task' into the input field with data-test attribute 'inputs' and click the button with data-test attribute 'btn'.
+3. Type 'Second task' into the input field and click the button.
+4. Type 'Third task' into the input field and click the button.
+5. Locate the first task in the task list using its data-test attribute 'lists'.
+6. Click the delete button associated with the first task.
+7. Check the count of task lists.
 
-## Learn More
+**Expected Outcome:** The count of task lists should be reduced to 1, confirming the successful deletion of the first task from the list.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Test State Management
 
-### Code Splitting
+### Test Case: Checking if it's stored
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Description:** This test validates that the application's state is correctly managed after adding a task.
 
-### Analyzing the Bundle Size
+**Steps:**
+1. Visit the web application at 'http://localhost:3000'.
+2. Type 'First task' into the input field with data-test attribute 'inputs' and click the button with data-test attribute 'btn'.
+3. Access the application's window object and retrieve the 'store' property.
+4. Retrieve the state from the 'store'.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Expected Outcome:** The retrieved state should match the expected structure and data: `{ Todo: { todos: [{id: 'First task', todo: 'First task'}] } }`. This confirms that the task has been correctly stored in the application's state.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please note that the provided test cases assume that the web application behaves as described and the selectors ('data-test' attributes) are correctly implemented in the application's code.

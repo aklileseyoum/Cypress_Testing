@@ -10,6 +10,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(AddTodoAction(todo));
+    setTodo('');
   }
 
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ function App() {
             fontSize: 20,
             color: 'rgb(65, 27, 27)',
           }} 
+          value = {todo}
           onChange={(e) => setTodo(e.target.value)}
+          data-test="inputs"
           />
           <button type='submit'
           style={{
@@ -40,6 +43,7 @@ function App() {
             backgroundColor: 'rgb(65, 27, 27)',
             color: 'white',
           }}
+          data-test="btn"
           >Go</button>
         </form>
         <TaskList/>
